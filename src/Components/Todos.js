@@ -1,26 +1,26 @@
-import React from 'react'
-import {Items} from './Items'
+import React from 'react';
 
-
-export const Todos = (props) => {
+function TodoItem({ todo, onDelete }) {
   return (
-    
-
-    <div className='container'>
-<br></br>
-<h5>Your TODOs :</h5>
-
-
-
-
-      
-     { props.todos.length===0? "Sakiyo TODOS, Enjoyy!!":
-      props.todos.map((todo)=>{
-        return <Items todo={todo} key={todo.sn} onDelete={props.onDelete}/>
-      })
-    }
-    
-      
+    <div className="card mb-3">
+      <div className="card-body">
+        <h5 className="card-title">{todo.title}</h5>
+        <p className="card-text">{todo.desc}</p>
+        <p className="card-text"><small className="text-muted">Published: {todo.publishedTime}</small></p>
+        <button className="btn btn-danger" onClick={() => onDelete(todo)}>Delete</button>
       </div>
-  )
+    </div>
+  );
 }
+
+function Todos({ todos, onDelete }) {
+  return (
+    <div>
+      {todos.map((todo) => (
+        <TodoItem key={todo.sn} todo={todo} onDelete={onDelete} />
+      ))}
+    </div>
+  );
+}
+
+export { Todos };
